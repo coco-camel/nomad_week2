@@ -1,44 +1,44 @@
 "use client";
 
-import FormButton from "@/components/form-btn";
-import FormInput from "@/components/form-input";
 import { AcademicCapIcon } from "@heroicons/react/24/solid";
 import { useFormState } from "react-dom";
 import { handleForm } from "./actions";
+import Input from "@/components/input";
+import Button from "@/components/button";
 
 export default function Login() {
-  const [state, action] = useFormState(handleForm, { potato: 1 } as any);
+  const [state, action] = useFormState(handleForm, null);
 
-  const isSuccess = state?.errors?.length === 0;
+  const hasSubmittedSuccessfully = !state?.fieldErrors && state !== null;
 
   return (
     <main className="bg-gray-100 flex justify-center items-center w-full h-screen p-5">
-      <div className="flex flex-col items-center w-[400px] gap-5">
+      <div className="flex flex-col items-center w-[600px] gap-5">
         <AcademicCapIcon className="w-12 h-12 text-red-500 mb-4" />
         <form action={action} className="w-full">
-          <FormInput
+          <Input
             name="email"
             type="email"
             placeholder="Email"
             required
-            errors={[]}
+            errors={state?.fieldErrors.email}
           />
-          <FormInput
+          <Input
             name="username"
             type="text"
             placeholder="Username"
             required
-            errors={[]}
+            errors={state?.fieldErrors.username}
           />
-          <FormInput
+          <Input
             name="password"
             type="password"
             placeholder="Password"
             required
-            errors={state?.errors ?? []}
+            errors={state?.fieldErrors.password}
           />
-          <FormButton text="Log in" />
-          {isSuccess && (
+          <Button text="Log in" />
+          {hasSubmittedSuccessfully && (
             <div className="bg-green-500 rounded-full w-full py-3 h-10 m-1 flex justify-center items-center font-bold">
               <span>Welcom back!</span>
             </div>
