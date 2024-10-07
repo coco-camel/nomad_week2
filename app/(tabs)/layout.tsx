@@ -1,3 +1,4 @@
+import TabBar from "@/components/tab-bar";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
@@ -18,10 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} bg-neutral-900 text-white max-w-screen-sm mx-auto`}
-      >
+      <body className={`${inter.className} mx-auto`}>
         {children}
+        <TabBar />
       </body>
     </html>
   );
